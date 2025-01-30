@@ -1,5 +1,4 @@
 import { BadRequestException } from '~/utils/exceptions'
-import type { User } from '~~/types/users'
 
 export function checkUsernameAndPassword(username: string, password: string) {
     /**
@@ -21,12 +20,12 @@ export function checkUsernameAndPassword(username: string, password: string) {
 
 export async function encryptPassword(password: string) {
     try {
-    const bcrypt = require('bcrypt')
-    const saltRounds = 10
+        const bcrypt = require('bcrypt')
+        const saltRounds = 10
 
-    const hashedPassword = await bcrypt.hash(password, saltRounds)
+        const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-    return hashedPassword
+        return hashedPassword
     } catch (error) {
         throw error
     }
