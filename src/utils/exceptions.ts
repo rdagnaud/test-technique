@@ -6,12 +6,12 @@ class Exception implements ApiException {
 
 export class NotFoundException extends Exception {
     constructor(error: any) {
-      super(error, 404)
+        super(error, 404)
     }
   }
 
-  export class BadRequestException extends Exception {
+export class BadRequestException extends Exception {
     constructor(error: any) {
-      super(error, 400)
+        super(error, 400)
     }
-  }
+}
