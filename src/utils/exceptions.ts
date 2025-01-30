@@ -9,10 +9,7 @@ export class NotFoundException extends Exception {
       super(error, 404)
     }
   }
-  
-  /**
-   * Création d'une 400
-   */
+
   export class BadRequestException extends Exception {
     constructor(error: any) {
       super(error, 400)

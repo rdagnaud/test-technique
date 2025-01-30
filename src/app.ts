@@ -1,5 +1,6 @@
 import cors from 'cors'
 import express from 'express'
+
 import { config } from '~/config'
 import { ExceptionsHandler } from '~/middlewares/exceptions.handler'
 import { UnknownRoutesHandler } from '~/middlewares/unknownRoutes.handler'
