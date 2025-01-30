@@ -7,7 +7,7 @@ const db = new sqlite3.Database('database/database_technical_test.sqlite')
  */
 const createUsersTable: string = `CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username VARCHAR(20) NOT NULL,
+    username VARCHAR(20) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL
 );`
 

@@ -1,4 +1,5 @@
 import { BadRequestException } from '~/utils/exceptions'
+import type { User } from '~~/types/users'
 
 export function checkUsernameAndPassword(username: string, password: string) {
     /**
@@ -15,5 +16,18 @@ export function checkUsernameAndPassword(username: string, password: string) {
 
     if (username.length < 8 || username.length > 20) {
         throw new BadRequestException(`Username length should be between 8 and 20 characters`)
+    }
+}
+
+export async function encryptPassword(password: string) {
+    try {
+    const bcrypt = require('bcrypt')
+    const saltRounds = 10
+
+    const hashedPassword = await bcrypt.hash(password, saltRounds)
+
+    return hashedPassword
+    } catch (error) {
+        throw error
     }
 }
