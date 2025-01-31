@@ -5,6 +5,9 @@ export function checkUsernameAndPassword(username: string, password: string) {
      * Checking the byteLength of the provided password as bcrypt only handles first 72 bytes of a string.
      * Any extra bytes would be ignored.
      */
+    if (username === undefined || password === undefined)
+        throw new BadRequestException(`No username or password provided`)
+
     if (Buffer.byteLength(password, `utf-8`) > 72) {
         throw new BadRequestException(`Password is too long`)
     }
