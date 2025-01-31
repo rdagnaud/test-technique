@@ -16,7 +16,8 @@ db.exec(createUsersTable)
 const createProductsTable: string = `CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(50) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT,
+    user_id INTEGER NOT NULL
 );`;
 
 db.exec(createProductsTable)
