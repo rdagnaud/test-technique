@@ -19,7 +19,7 @@
     "build": "tsup src/app.ts --format cjs --clean",
     "start": "node dist/app.js",
     "test": "",
-    "initdb": "node database/init_db.ts"
+    "initdb": "ts-node database/init_db.ts"
   },
   "repository": {
     "type": "git",
