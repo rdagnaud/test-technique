@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { UsersService } from '~/resources/users/users.service'
 import { auth, CustomRequest } from '~/middlewares/auth.handler'
+import { User } from '~~/types/users'
 
 const UsersController = Router()
 
@@ -8,7 +9,7 @@ const service = new UsersService()
 
 UsersController.post('/', async (req, res) => {
     try {
-        const user = await service.create(req.body)
+        const user: Omit<User, `password`> = await service.create(req.body)
 
         return res
             .status(201)

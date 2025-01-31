@@ -13,14 +13,14 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
         const token = req.header(`Authorization`)?.replace(`Bearer `, ``)
     
         if (!token) {
-            throw new UnauthorizedException
+            throw new UnauthorizedException (`You must be authenticated to perform this request`)
         }
     
         const decoded: JwtPayload = jwt.verify(token, config.SECRET_KEY) as JwtPayload
         ;(req as CustomRequest).token = decoded
     
         next()
-    } catch (err) {
-        throw new UnauthorizedException
+    } catch (error) {
+        throw new UnauthorizedException (error)
     }
 };

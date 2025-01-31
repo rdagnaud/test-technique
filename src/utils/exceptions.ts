@@ -17,7 +17,7 @@ export class BadRequestException extends Exception {
 }
 
 export class UnauthorizedException extends Exception {
-    constructor() {
-        super(`You must be authenticated to perform this request`, 401)
+    constructor(error: any) {
+        super(error, 401)
     }
 }

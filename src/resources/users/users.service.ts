@@ -5,7 +5,7 @@ import { checkUsernameAndPassword, encryptPassword, comparePassword } from '~/ut
 import { BadRequestException, NotFoundException, UnauthorizedException } from '~/utils/exceptions'
 import { config } from '~/config'
 
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require(`sqlite3`).verbose();
 const databasePath = config.DATABASE_PATH
 
 export class UsersService {
@@ -84,7 +84,7 @@ export class UsersService {
         try {
             console.log(token)
             if (token._id !== id)
-                throw new UnauthorizedException
+                throw new UnauthorizedException (`You are not authorized to perfom this request`)
 
             const db = new sqlite3.Database(databasePath);
 
@@ -103,7 +103,7 @@ export class UsersService {
                 }))
 
             if (foundId === 0)
-                throw new NotFoundException("User has already been deleted")
+                throw new NotFoundException(`User has already been deleted`)
 
             const deleteUserByIdQuery: string = `DELETE FROM users WHERE id = ?`
 
