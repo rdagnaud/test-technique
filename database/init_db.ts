@@ -1,6 +1,8 @@
-const sqlite3 = require('sqlite3')
+import { config } from '~/config'
 
-const db = new sqlite3.Database('database/database_technical_test.sqlite')
+const sqlite3 = require('sqlite3').verbose()
+
+const db = new sqlite3.Database(config.DATABASE_PATH)
 
 /**
  * Using VARCHAR(60) for password as bcrypt hashes contain excatly 60 characters

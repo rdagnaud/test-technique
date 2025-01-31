@@ -1,3 +1,5 @@
 export const config = {
-    API_PORT: 3000
+    API_PORT: 3000,
+    DATABASE_PATH: `database/database_technical_test.sqlite`,
+    SECRET_KEY: `4229F57CB23A5C920A4F8FF229FA913575F7D8AFAC36F0FE280A8137C33550AC`
 }

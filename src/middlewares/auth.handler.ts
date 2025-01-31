@@ -1,23 +1,22 @@
-import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 
 import { UnauthorizedException } from '~/utils/exceptions'
-
-export const SECRET_KEY: Secret = '4229F57CB23A5C920A4F8FF229FA913575F7D8AFAC36F0FE280A8137C33550AC'
+import { config } from '~/config'
 
 export interface CustomRequest extends Request {
-    token: string | JwtPayload;
+    token: JwtPayload;
 }
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = req.header('Authorization')?.replace('Bearer ', '')
+        const token = req.header(`Authorization`)?.replace(`Bearer `, ``)
     
         if (!token) {
             throw new UnauthorizedException
         }
     
-        const decoded: string | JwtPayload = jwt.verify(token, SECRET_KEY)
+        const decoded: JwtPayload = jwt.verify(token, config.SECRET_KEY) as JwtPayload
         ;(req as CustomRequest).token = decoded
     
         next()
