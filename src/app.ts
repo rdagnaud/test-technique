@@ -4,6 +4,7 @@ import 'express-async-errors';
 
 import { config } from '~/config'
 import { UsersController } from '~/resources/users/users.controller'
+import { ProductsController } from '~/resources/products/products.controller'
 import { ExceptionsHandler } from '~/middlewares/exceptions.handler'
 import { UnknownRoutesHandler } from '~/middlewares/unknownRoutes.handler'
 
@@ -19,6 +20,7 @@ app.use(require('body-parser').json());
 app.use(require('body-parser').urlencoded({ extended: true }));
 
 app.use('/users', UsersController)
+app.use('/products', ProductsController)
 
 /**
  * Errors handling

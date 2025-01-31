@@ -82,7 +82,6 @@ export class UsersService {
 
     async delete(token: JwtPayload, id: string): Promise<void> {
         try {
-            console.log(token)
             if (token._id !== id)
                 throw new UnauthorizedException (`You are not authorized to perfom this request`)
 

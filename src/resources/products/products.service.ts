@@ -10,7 +10,7 @@ const databasePath = config.DATABASE_PATH
 export class ProductsService {
     async create(productData: Product, token: JwtPayload): Promise<Product> {
         try {
-            const userId: string = token.id
+            const userId: string = token._id
             const productName: string = productData.name
             const productDescription: string | undefined = productData.description
 
@@ -101,7 +101,7 @@ export class ProductsService {
     
     async update(productId: string, productData: Product, token: JwtPayload): Promise<Product> {
         try {
-            const userId: string = token.id
+            const userId: string = token._id
             const productName: string | undefined = productData.name
             const productDescription: string | undefined = productData.description
 
@@ -110,7 +110,7 @@ export class ProductsService {
             /**
              * Checking if the requested product exists in the database
              */
-            const checkExistingProductQuery: string = `SELECT id FROM products WHERE id = ?`
+            const checkExistingProductQuery: string = `SELECT name, description, id, user_id FROM products WHERE id = ?`
             const foundProduct: Product = await new Promise((resolve, reject) =>
                 db.all(checkExistingProductQuery, [productId], (error: string, rows: any) => {
                     if (error)
@@ -177,11 +177,11 @@ export class ProductsService {
 
     async delete(productId: string, token: JwtPayload): Promise<void> {
         try {
-            const userId: string = token.id
+            const userId: string = token._id
 
             const db = new sqlite3.Database(databasePath);
 
-            const fetchProductByIdQuery: string = `SELECT id FROM products WHERE id = ?`
+            const fetchProductByIdQuery: string = `SELECT user_id, id FROM products WHERE id = ?`
             const foundProduct: Product = await new Promise((resolve, reject) =>
                 db.all(fetchProductByIdQuery, [productId], (error: string, rows: any) => {
                     if (error)

@@ -32,7 +32,7 @@ ProductsController.get('/:id', async (req, res) => {
     }
 })
 
-ProductsController.get('/', auth, async (req, res) => {
+ProductsController.get('/', async (req, res) => {
     try {
         const products: Product[] = await service.index()
 
@@ -44,7 +44,7 @@ ProductsController.get('/', auth, async (req, res) => {
     }
 })
 
-ProductsController.put('/:id', auth, async (req, res) => {
+ProductsController.post('/:id', auth, async (req, res) => {
     try {
         const { id } = req.params;
         const product: Product = await service.update(id, req.body, (req as CustomRequest).token)
