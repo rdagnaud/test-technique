@@ -104,6 +104,16 @@ export class UsersService {
             if (foundId === 0)
                 throw new NotFoundException(`User has already been deleted`)
 
+            /**
+             * Before deleting the user, we need to delete the products belonging to them
+             */
+            const deleteProductsByUserIDQuery: string = `DELETE FROM products WHERE user_id = ?`
+            
+            await db.run(deleteProductsByUserIDQuery, [id], (error: any) => {
+                if (error)
+                    throw (error)
+            })
+
             const deleteUserByIdQuery: string = `DELETE FROM users WHERE id = ?`
 
             await db.run(deleteUserByIdQuery, [id], (error: any) => {
