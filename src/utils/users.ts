@@ -23,7 +23,7 @@ export function checkUsernameAndPassword(username: string, password: string) {
 
 export async function encryptPassword(password: string) {
     try {
-        const bcrypt = require('bcrypt')
+        const bcrypt = require(`bcrypt`)
         const saltRounds = 10
 
         const hashedPassword = await bcrypt.hash(password, saltRounds)
@@ -36,7 +36,7 @@ export async function encryptPassword(password: string) {
 
 export async function comparePassword(password: string, hashedPassword: string) {
     try {
-        const bcrypt = require('bcrypt')
+        const bcrypt = require(`bcrypt`)
 
         const isValidPassword = await bcrypt.compare(password, hashedPassword)
 

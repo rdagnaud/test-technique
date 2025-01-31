@@ -7,7 +7,7 @@ const ProductsController = Router()
 
 const service = new ProductsService()
 
-ProductsController.post('/', auth, async (req, res) => {
+ProductsController.post(`/`, auth, async (req, res) => {
     try {
         const product: Product = await service.create(req.body, (req as CustomRequest).token)
 
@@ -19,7 +19,7 @@ ProductsController.post('/', auth, async (req, res) => {
     }
 })
 
-ProductsController.get('/:id', async (req, res) => {
+ProductsController.get(`/:id`, async (req, res) => {
     try {
         const { id } = req.params;
         const product: Product = await service.get(id)
@@ -32,7 +32,7 @@ ProductsController.get('/:id', async (req, res) => {
     }
 })
 
-ProductsController.get('/', async (req, res) => {
+ProductsController.get(`/`, async (req, res) => {
     try {
         const products: Product[] = await service.index()
 
@@ -44,7 +44,7 @@ ProductsController.get('/', async (req, res) => {
     }
 })
 
-ProductsController.post('/:id', auth, async (req, res) => {
+ProductsController.post(`/:id`, auth, async (req, res) => {
     try {
         const { id } = req.params;
         const product: Product = await service.update(id, req.body, (req as CustomRequest).token)
@@ -57,7 +57,7 @@ ProductsController.post('/:id', auth, async (req, res) => {
     }
 })
 
-ProductsController.delete('/:id', auth, async (req, res) => {
+ProductsController.delete(`/:id`, auth, async (req, res) => {
     try {
         const { id } = req.params;
         
@@ -65,7 +65,7 @@ ProductsController.delete('/:id', auth, async (req, res) => {
         
         return res
             .status(200)
-            .json("Product successfully deleted")
+            .json(`Product successfully deleted`)
     } catch(error) {
         throw error
     }
