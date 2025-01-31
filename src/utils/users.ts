@@ -33,3 +33,15 @@ export async function encryptPassword(password: string) {
         throw error
     }
 }
+
+export async function comparePassword(password: string, hashedPassword: string) {
+    try {
+        const bcrypt = require('bcrypt')
+
+        const isValidPassword = await bcrypt.compare(password, hashedPassword)
+
+        return isValidPassword
+    } catch (error) {
+        throw error
+    }
+}

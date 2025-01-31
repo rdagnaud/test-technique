@@ -7,28 +7,28 @@ const service = new UsersService()
 
 UsersController.post('/', async (req, res) => {
     try {
-      const user = await service.create(req.body)
+        const user = await service.create(req.body)
 
-      return res
-          .status(201)
-          .json(user)
+        return res
+            .status(201)
+            .json(user)
     } catch (error) {
-      throw (error)
+        throw (error)
     }
 })
 
-// UsersController.post('/auth', async (req, res) => {
-//   console.log(req.body)
-//   try {
-//       const JWT = await service.authenticate(req.body)
+UsersController.post('/auth', async (req, res) => {
+    console.log(req.body)
+    try {
+        const JWT = await service.auth(req.body)
 
-//       return res
-//           .status(201)
-//           .json(JWT)
-//   } catch(error) {
-//       throw error
-//   }
-// })
+        return res
+            .status(201)
+            .json(JWT)
+    } catch(error) {
+        throw error
+    }
+})
 
 UsersController.delete('/:id', (req, res) => {
 })
