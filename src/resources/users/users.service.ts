@@ -29,14 +29,8 @@ export class UsersService {
 
             const encryptedPassword: string = await encryptPassword(password)
 
-            /**
-             * This shouldn't happen as if the encryption failed, an error should have been thrown. Still checking (better safe than sorry)
-             */
-            if (encryptedPassword === ``)
-                throw `Failed to encrypt password`
-
             const insertUserQuery: string = `INSERT INTO users (username, password) VALUES (?, ?)`
-            const id:number = await new Promise((resolve, reject) =>
+            const id: number = await new Promise((resolve, reject) =>
                 db.run(insertUserQuery, [username, encryptedPassword], function (this: any, error: string) {
                     error ? reject(error) : resolve(this.lastID)
                 }))
